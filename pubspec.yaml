@@ -55,6 +55,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/appimagebottle.PNG
+    - assets/toothbrush-removebg-preview.png
+    - assets/straw.png
+    - assets/plasticbag.png
+    - assets/plasticwrap.png
  
      
 

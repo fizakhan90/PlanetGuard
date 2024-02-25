@@ -12,21 +12,18 @@ class _HomePageState extends State<HomePage> {
 
   final List<Product> products = [
     Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
-    Product('Toothbrush', 'assets/product2.jpg'),
-    Product('Plastic Straws', 'assets/product3.jpg'),
+    Product('Toothbrush', 'assets/toothbrush-removebg-preview.png'),
+    Product('Plastic Straws', 'assets/straw.png'),
     Product('Plastic Cutlery', 'assets/appimagebottle.PNG'),
-    Product('Plastic Bag', 'assets/product2.jpg'),
-    Product("Plastic Wrap",'assets/products3.jpg'),
+    Product('Plastic Bag', 'assets/plasticbag.png'),
+    Product("Plastic Wrap",'assets/plasticwrap.png'),
     Product("Wet Wipes",'assets/products3.jpg'),
     Product("Cotton Buds",'assets/products3.jpg'),
     Product("Razor",'assets/products3.jpg'),
     Product("Hair Brushes and Combs",'assets/products3.jpg'),
     Product("Tampons and Pads",'assets/products3.jpg'),
     Product("Toilet Paper",'assets/products3.jpg'),
-
-
-    // Add more products as needed
-  ];
+    ];
 
   List<Product> completedProducts = [];
 
@@ -207,7 +204,6 @@ class ProductCard extends StatefulWidget {
   final Product product;
   final Function()? onTap;
   final Function()? onCompleted;
- 
 
   ProductCard({required this.product, this.onTap, this.onCompleted});
 
@@ -216,15 +212,20 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  bool isSelected = false;
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      color: widget.product.isCompleted ? Colors.greenAccent : null,
-      child: InkWell(
-        onTap: () {
-          _showTapEffect();
-        },
+    return GestureDetector(
+      onTap: () {
+        _showDialog();
+      },
+      onLongPress: () {
+        _toggleSelection();
+      },
+      child: Card(
+        margin: EdgeInsets.all(8.0),
+        color: isSelected ? Colors.greenAccent : null,
         child: Column(
           children: [
             Image.asset(
@@ -246,12 +247,32 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
-  void _showTapEffect() {
-    if (widget.onTap != null) {
-      setState(() {
-        widget.product.isCompleted = !widget.product.isCompleted;
-      });
-      widget.onTap!();
-    }
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(widget.product.name),
+          content: Text('Selected Product: ${widget.product.name}'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _toggleSelection() {
+    setState(() {
+      isSelected = !isSelected;
+      if (isSelected && widget.onCompleted != null) {
+        widget.onCompleted!();
+      }
+    });
   }
 }
