@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:planet_guard/pages/login.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
   int _currentIndex = 0;
 
   final List<Product> products = [
@@ -27,25 +36,25 @@ class _HomePageState extends State<HomePage> {
     Product("Toilet Paper",'assets/toiletpaper.png'),
     ];
 
+
   List<Product> completedProducts = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product List'),
+        title: Text('Product List'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.check),
+            icon: Icon(Icons.check),
             onPressed: () {
-              Navigator.pushNamed(context, '/profile',
-                  arguments: completedProducts);
+              Navigator.pushNamed(context, '/profile', arguments: completedProducts);
             },
           ),
         ],
       ),
       body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
@@ -55,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           return ProductCard(
             product: products[index],
             onTap: () {
-              _showAlternativesDialog(context, products[index]);
+              _showDialog(context, products[index]);
             },
             onCompleted: () {
               setState(() {
@@ -65,7 +74,7 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-       bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -73,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           });
           _navigateToPage(index);
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'User Profile',
@@ -94,70 +103,27 @@ class _HomePageState extends State<HomePage> {
 
   void _navigateToPage(int index) {
     if (index == 0) {
-      // Navigate to User Profile Page
-      Navigator.pushNamed(context, '/profile', arguments: completedProducts);
+      Navigator.pushNamed(context as BuildContext, '/profile', arguments: completedProducts);
     } else if (index == 1) {
-      // Navigate to Marketplace Page
-      Navigator.pushNamed(context, '/marketplace');
+      Navigator.pushNamed(context as BuildContext, '/marketplace');
     } else if (index == 2) {
       // Navigate to Home Page (current page)
     }
   }
-}
 
-  void _showAlternativesDialog(BuildContext context, Product selectedProduct) {
-    // Placeholder data for alternative products (replace it with your actual data)
-    List<Product> alternativeProducts;
-
-    // Determine alternative products based on the selected product
-    if (selectedProduct.name == 'Product 1') {
-      alternativeProducts = [
-        Product('Alternative 1.1', 'assets/alternative1_1.jpg'),
-        Product('Alternative 1.2', 'assets/alternative1_2.jpg'),
-      ];
-    } else if (selectedProduct.name == 'Product 2') {
-      alternativeProducts = [
-        Product('Alternative 2.1', 'assets/alternative2_1.jpg'),
-        Product('Alternative 2.2', 'assets/alternative2_2.jpg'),
-      ];
-    } else if (selectedProduct.name == 'Product 3') {
-      alternativeProducts = [
-        Product('Alternative 3.1', 'assets/alternative3_1.jpg'),
-        Product('Alternative 3.2', 'assets/alternative3_2.jpg'),
-      ];
-    } else {
-      // Handle other products or set a default case
-      alternativeProducts = [];
-    }
-
+  void _showDialog(BuildContext context, Product selectedProduct) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alternatives for ${selectedProduct.name}'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Selected Product: ${selectedProduct.name}'),
-              const SizedBox(height: 16.0),
-              const Text('Alternatives:'),
-              for (Product alternative in alternativeProducts)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ${alternative.name}'),
-                    const SizedBox(height: 8.0),
-                  ],
-                ),
-              // Add more alternative product information as needed
-            ],
-          ),
+          title: Text(selectedProduct.name),
+          content: Text(_getContentForProduct(selectedProduct)),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text('Close'),
             ),
           ],
         );
@@ -165,10 +131,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  String _getContentForProduct(Product product) {
+    // Define content for each product
+    Map<String, String> productContent = {
+      'Plastic Bottle': 'Content for Plastic Bottle',
+      'Toothbrush': 'Content for Toothbrush',
+      'Plastic Straws': 'Content for Plastic Straws',
+      'Plastic Cutlery': 'Content for Plastic Cutlery',
+      'Plastic Bag': 'Content for Plastic Bag',
+      'Plastic Wrap': 'Content for Plastic Wrap',
+      'Wet Wipes': 'Content for Wet Wipes',
+      'Cotton Buds': 'Content for Cotton Buds',
+      'Razor': 'Content for Razor',
+      'Hair Brushes and Combs': 'Content for Hair Brushes and Combs',
+      'Tampons and Pads': 'Content for Tampons and Pads',
+      'Toilet Paper': 'Content for Toilet Paper',
+    };
+
+    return productContent[product.name] ?? 'Default content for unknown product';
+  }
+}
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
-
   @override
   Widget build(BuildContext context) {
     final List<Product> completedProducts =
@@ -176,7 +160,7 @@ class UserProfile extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Completed Products'),
+        title: Text('Completed Products'),
       ),
       body: ListView.builder(
         itemCount: completedProducts.length,
@@ -191,9 +175,9 @@ class UserProfile extends StatelessWidget {
 class Product {
   final String name;
   final String imagePath;
-   bool isCompleted;
+  bool isCompleted;
 
-  Product(this.name, this.imagePath,{this.isCompleted = false});
+  Product(this.name, this.imagePath, {this.isCompleted = false});
 }
 
 class ProductCard extends StatefulWidget {
@@ -214,7 +198,7 @@ class _ProductCardState extends State<ProductCard> {
 Widget build(BuildContext context) {
   return GestureDetector(
     onTap: () {
-      _showDialog();
+      _showDialog(context);
     },
     onLongPress: () {
       _toggleSelection();
@@ -235,7 +219,8 @@ Widget build(BuildContext context) {
               ),
               child: Image.asset(
                 widget.product.imagePath,
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.fitHeight
+
               ),
             ),
           ),
@@ -268,13 +253,13 @@ Widget build(BuildContext context) {
 
 
 
-  void _showDialog() {
+  void _showDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(widget.product.name),
-          content: Text('Selected Product: ${widget.product.name}'),
+          content: Text(_getContentForProduct(widget.product)),
           actions: [
             TextButton(
               onPressed: () {
@@ -295,5 +280,25 @@ Widget build(BuildContext context) {
         widget.onCompleted!();
       }
     });
+  }
+
+  String _getContentForProduct(Product product) {
+    // Define content for each product
+    Map<String, String> productContent = {
+      'Plastic Bottle': 'Content for Plastic Bottle',
+      'Toothbrush': 'Content for Toothbrush',
+      'Plastic Straws': 'Content for Plastic Straws',
+      'Plastic Cutlery': 'Content for Plastic Cutlery',
+      'Plastic Bag': 'Content for Plastic Bag',
+      'Plastic Wrap': 'Content for Plastic Wrap',
+      'Wet Wipes': 'Content for Wet Wipes',
+      'Cotton Buds': 'Content for Cotton Buds',
+      'Razor': 'Content for Razor',
+      'Hair Brushes and Combs': 'Content for Hair Brushes and Combs',
+      'Tampons and Pads': 'Content for Tampons and Pads',
+      'Toilet Paper': 'Content for Toilet Paper',
+    };
+
+    return productContent[product.name] ?? 'Default content for unknown product';
   }
 }
