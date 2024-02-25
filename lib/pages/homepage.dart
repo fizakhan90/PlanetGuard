@@ -87,6 +87,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
         ],
+        selectedItemColor: const Color.fromARGB(255, 23 , 33, 7),
       ),
     );
   }
@@ -224,7 +225,6 @@ Widget build(BuildContext context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           AspectRatio(
             aspectRatio: 16/12, // Adjust the aspect ratio as needed
             child: ClipRRect(
@@ -239,15 +239,25 @@ Widget build(BuildContext context) {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.product.name,
-              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,           
-            ),
-        
-          ),
+          Container(
+              height: 47,
+              width: 200,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(8.0),
+                  bottomRight: Radius.circular(8.0),
+                  ), 
+                color: Color.fromARGB(255, 86, 130, 20),
+              ),
+              child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.product.name,
+                          style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,           
+                        ),
+                      ),
+                    ),
         ],
       ),
     ),
