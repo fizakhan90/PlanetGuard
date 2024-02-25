@@ -25,18 +25,18 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Product> products = [
-    Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
+    Product('Plastic Bottle', 'assets/appimagebottle.png'),
     Product('Toothbrush', 'assets/toothbrush-removebg-preview.png'),
     Product('Plastic Straws', 'assets/straw.png'),
-    Product('Plastic Cutlery', 'assets/plasticcutlery.jpg'),
+    Product('Plastic Cutlery', 'assets/plasticcutlery.png'),
     Product('Plastic Bag', 'assets/plasticbag.png'),
     Product("Plastic Wrap",'assets/plasticwrap.png'),
     Product("Wet Wipes",'assets/wetwipesimage.png'),
     Product("Cotton Buds",'assets/cottonbuds.png'),
     Product("Razor",'assets/razorimage.jpg'),
-    Product("Hair Brushes and Combs",'assets/hairbrush.png'),
-    Product("Tampons and Pads",'assets/products3.jpg'),
-    Product("Toilet Paper",'assets/toiletpaper.jpg'),
+    Product("Hair Brushes",'assets/hairbrush.png'),
+    Product("Tampons and Pads",'assets/pads.png'),
+    Product("Toilet Paper",'assets/toiletpaper.png'),
   ];
 
   List<Product> completedProducts = [];
@@ -98,6 +98,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
         ],
+        selectedItemColor: const Color.fromARGB(255, 23 , 33, 7),
       ),
     );
   }
@@ -107,11 +108,6 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushNamed(context as BuildContext, '/profile', arguments: completedProducts);
     } else if (index == 1) {
       Navigator.pushNamed(context as BuildContext, '/marketplace');
-      // Navigate to User Profile Page
-      Navigator.pushNamed(context, '/profile', arguments: completedProducts);
-    } else if (index == 1) {
-      // Navigate to Marketplace Page
-      Navigator.pushNamed(context, '/marketplace');
     } else if (index == 2) {
       // Navigate to Home Page (current page)
     }
@@ -123,7 +119,7 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(selectedProduct.name),
-          content: Text(_getContentForProduct(selectedProduct)),
+          content: Text(selectedProduct.getContent()),
           actions: [
             TextButton(
               onPressed: () {
@@ -135,28 +131,6 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-  }
-
-  String _getContentForProduct(Product product) {
-    // Define content and styles for each product
-    Map<String, Tuple2<String, TextStyle>> productContent = {
-      'Plastic Bottle': Tuple2('Content for Plastic Bottle', TextStyle(color: Colors.blue, fontSize: 16.0)),
-      'Toothbrush': Tuple2('Content for Toothbrush', TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-      'Plastic Straws': Tuple2('Content for Plastic Straws', TextStyle(color: Colors.green, fontStyle: FontStyle.italic)),
-      'Plastic Cutlery': Tuple2('Content for Plastic Cutlery', TextStyle(color: Colors.orange)),
-      'Plastic Bag': Tuple2('Content for Plastic Bag', TextStyle(color: Colors.purple)),
-      'Plastic Wrap': Tuple2('Content for Plastic Wrap', TextStyle(color: Colors.teal)),
-      'Wet Wipes': Tuple2('Content for Wet Wipes', TextStyle(color: Colors.brown)),
-      'Cotton Buds': Tuple2('Content for Cotton Buds', TextStyle(color: Colors.indigo)),
-      'Razor': Tuple2('Content for Razor', TextStyle(color: Colors.pink)),
-      'Hair Brushes and Combs': Tuple2('Content for Hair Brushes and Combs', TextStyle(color: Colors.amber)),
-      'Tampons and Pads': Tuple2('Content for Tampons and Pads', TextStyle(color: Colors.deepPurple)),
-      'Toilet Paper': Tuple2('Content for Toilet Paper', TextStyle(color: Colors.cyan)),
-    };
-
-    var contentAndStyle = productContent[product.name] ?? Tuple2('Default content for unknown product', TextStyle());
-
-    return contentAndStyle.item1; // Returning the content part of Tuple
   }
 }
 
@@ -188,6 +162,28 @@ class Product {
   bool isCompleted;
 
   Product(this.name, this.imagePath, {this.isCompleted = false});
+
+  String getContent() {
+    // Define content and styles for each product
+    Map<String, Tuple2<String, TextStyle>> productContent = {
+      'Plastic Bottle': Tuple2('Switching to reusable stainless steel bottle, they are recyclable, light-weight and does not contribute to plastic waste',  TextStyle(color: Colors.black)),
+      'Toothbrush': Tuple2('Using plastic toothbrushes not only drains the oil supply, but its also polluting our ocean and killed millions of wildlife animals every year. Switch to alternatives like bamboo and wooden toothbrushes.',  TextStyle(color: Colors.black)),
+      'Plastic Straws': Tuple2('Content for Plastic Straws', TextStyle(color: Colors.black)),
+      'Plastic Cutlery': Tuple2('When heated, plastic cutlery releases toxic byproducts that can contaminate food. These oligomers are harmful to both humans and the environment. The best alternative to plastic cutlery is wooden or edible cutlery.',  TextStyle(color: Colors.black)),
+      'Plastic Bag': Tuple2('Plastic bags have a long-lasting environmental impact, taking up to 2000 years to decompose. Adapting to alternatives like trendy tote bags will help reduce this plastic waste.',  TextStyle(color: Colors.black)),
+      'Plastic Wrap': Tuple2('Plastic wrap can leach chemicals into food, especially when in contact with fats and oils. These chemicals may disrupt hormones and affect health. Switch to alternatives like Glass Food Storage Containers or Beeswax Wraps.',  TextStyle(color: Colors.black)),
+      'Wet Wipes': Tuple2('Wet Wipes are the crucial ingredient of fat-bergs(lumps of congealed waste) that often build up in sewage systems across the globe. Sticking to reusable organic cloth wipes that can be reused again.',  TextStyle(color: Colors.black)),
+      'Cotton Buds': Tuple2('Plastic cotton buds break down into microplastics, which can be ingested by marine life, from the smallest phytoplankton to the largest whales. The best alternative is to use bamboo cotton buds or ear wash.',  TextStyle(color: Colors.black)),
+      'Razor': Tuple2('Your grooming regime might be contributing to the 2 billion plastic razors disposed of each year. A quick fix : adapting to a metal razor.', TextStyle(color: Colors.black)),
+      'Hair Brushes and Combs': Tuple2('Plastic brushes and combs take hundreds of years to break down in the environment. They persist in landfills, contributing to waste accumulation. Switch to using Wooden brushes and combs.',TextStyle(color: Colors.black)), 
+      'Tampons and Pads': Tuple2('On average, a woman is estimated to use and dispose about 10,000 of these menstruation products in her lifetime. Considering that half of the population of our planet is female, imagine all the non-recyclable single use waste we are genersting. Alterntaives like Menstrual Cups and disposable pads would help reduce a lot of plastic waste.', TextStyle(color: Colors.black)),
+      'Toilet Paper': Tuple2('This is a difficult object, which is usually wrapped in plastic and consumed so much. Switching to plastic-free packaging will help a lot in reducing plastic waste.', TextStyle(color: Colors.black)),
+    };
+
+    var contentAndStyle = productContent[name] ?? Tuple2('Default content for unknown product', TextStyle());
+
+    return contentAndStyle.item1; // Returning the content part of Tuple
+  }
 }
 
 class ProductCard extends StatefulWidget {
@@ -215,20 +211,40 @@ class _ProductCardState extends State<ProductCard> {
       },
       child: Card(
         margin: const EdgeInsets.all(8.0),
-        color: isSelected ? Colors.greenAccent : null,
+        color: isSelected ? const Color.fromARGB(200, 121, 159, 12) : null,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              widget.product.imagePath,
-              height: 100.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            AspectRatio(
+              aspectRatio: 16/12,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                ),
+                child: Image.asset(
+                  widget.product.imagePath,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.product.name,
-                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            Container(
+              height: 47,
+              width: 200,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(8.0),
+                  bottomRight: Radius.circular(8.0),
+                ),
+                color: Color.fromARGB(255, 86, 130, 20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.product.name,
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
@@ -244,7 +260,7 @@ class _ProductCardState extends State<ProductCard> {
         return AlertDialog(
           title: Text(widget.product.name),
           content: Text(
-            _getContentForProduct(widget.product),
+            widget.product.getContent(),
             style: _getContentStyle(widget.product),
           ),
           actions: [
@@ -263,18 +279,18 @@ class _ProductCardState extends State<ProductCard> {
   TextStyle _getContentStyle(Product product) {
     // Define content styles for each product
     Map<String, TextStyle> productStyles = {
-      'Plastic Bottle': TextStyle(color: Colors.blue, fontSize: 16.0),
-      'Toothbrush': TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-      'Plastic Straws': TextStyle(color: Colors.green, fontStyle: FontStyle.italic),
-      'Plastic Cutlery': TextStyle(color: Colors.orange),
-      'Plastic Bag': TextStyle(color: Colors.purple),
-      'Plastic Wrap': TextStyle(color: Colors.teal),
-      'Wet Wipes': TextStyle(color: Colors.brown),
-      'Cotton Buds': TextStyle(color: Colors.indigo),
-      'Razor': TextStyle(color: Colors.pink),
-      'Hair Brushes and Combs': TextStyle(color: Colors.amber),
-      'Tampons and Pads': TextStyle(color: Colors.deepPurple),
-      'Toilet Paper': TextStyle(color: Colors.cyan),
+      'Plastic Bottle': TextStyle(color: Colors.black),
+      'Toothbrush': TextStyle(color: Colors.black),
+      'Plastic Straws': TextStyle(color: Colors.black),
+      'Plastic Cutlery': TextStyle(color: Colors.black),
+      'Plastic Bag': TextStyle(color: Colors.black),
+      'Plastic Wrap': TextStyle(color: Colors.black),
+      'Wet Wipes': TextStyle(color: Colors.black),
+      'Cotton Buds': TextStyle(color: Colors.black),
+      'Razor': TextStyle(color: Colors.black),
+      'Hair Brushes and Combs': TextStyle(color: Colors.black),
+      'Tampons and Pads': TextStyle(color: Colors.black),
+      'Toilet Paper': TextStyle(color: Colors.black),
     };
 
     return productStyles[product.name] ?? TextStyle(); // Default style if not found
