@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,13 +30,13 @@ class _HomePageState extends State<HomePage> {
     Product('Plastic Straws', 'assets/straw.png'),
     Product('Plastic Cutlery', 'assets/plasticcutlery.jpg'),
     Product('Plastic Bag', 'assets/plasticbag.png'),
-    Product("Plastic Wrap", 'assets/plasticwrap.png'),
-    Product("Wet Wipes", 'assets/wetwipesimage.png'),
-    Product("Cotton Buds", 'assets/cottonbuds.png'),
-    Product("Razor", 'assets/razorimage.jpg'),
-    Product("Hair Brushes and Combs", 'assets/hairbrush.png'),
-    Product("Tampons and Pads", 'assets/products3.jpg'),
-    Product("Toilet Paper", 'assets/toiletpaper.jpg'),
+    Product("Plastic Wrap",'assets/plasticwrap.png'),
+    Product("Wet Wipes",'assets/wetwipesimage.png'),
+    Product("Cotton Buds",'assets/cottonbuds.png'),
+    Product("Razor",'assets/razorimage.jpg'),
+    Product("Hair Brushes and Combs",'assets/hairbrush.png'),
+    Product("Tampons and Pads",'assets/products3.jpg'),
+    Product("Toilet Paper",'assets/toiletpaper.jpg'),
   ];
 
   List<Product> completedProducts = [];
@@ -42,10 +45,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: const Text('Product List'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.pushNamed(context, '/profile', arguments: completedProducts);
             },
@@ -53,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
@@ -81,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           });
           _navigateToPage(index);
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'User Profile',
@@ -104,6 +107,11 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushNamed(context as BuildContext, '/profile', arguments: completedProducts);
     } else if (index == 1) {
       Navigator.pushNamed(context as BuildContext, '/marketplace');
+      // Navigate to User Profile Page
+      Navigator.pushNamed(context, '/profile', arguments: completedProducts);
+    } else if (index == 1) {
+      // Navigate to Marketplace Page
+      Navigator.pushNamed(context, '/marketplace');
     } else if (index == 2) {
       // Navigate to Home Page (current page)
     }
@@ -121,7 +129,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );
@@ -130,27 +138,31 @@ class _HomePageState extends State<HomePage> {
   }
 
   String _getContentForProduct(Product product) {
-    // Define content for each product
-    Map<String, String> productContent = {
-      'Plastic Bottle': 'Content for Plastic Bottle',
-      'Toothbrush': 'Content for Toothbrush',
-      'Plastic Straws': 'Content for Plastic Straws',
-      'Plastic Cutlery': 'Content for Plastic Cutlery',
-      'Plastic Bag': 'Content for Plastic Bag',
-      'Plastic Wrap': 'Content for Plastic Wrap',
-      'Wet Wipes': 'Content for Wet Wipes',
-      'Cotton Buds': 'Content for Cotton Buds',
-      'Razor': 'Content for Razor',
-      'Hair Brushes and Combs': 'Content for Hair Brushes and Combs',
-      'Tampons and Pads': 'Content for Tampons and Pads',
-      'Toilet Paper': 'Content for Toilet Paper',
+    // Define content and styles for each product
+    Map<String, Tuple2<String, TextStyle>> productContent = {
+      'Plastic Bottle': Tuple2('Content for Plastic Bottle', TextStyle(color: Colors.blue, fontSize: 16.0)),
+      'Toothbrush': Tuple2('Content for Toothbrush', TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+      'Plastic Straws': Tuple2('Content for Plastic Straws', TextStyle(color: Colors.green, fontStyle: FontStyle.italic)),
+      'Plastic Cutlery': Tuple2('Content for Plastic Cutlery', TextStyle(color: Colors.orange)),
+      'Plastic Bag': Tuple2('Content for Plastic Bag', TextStyle(color: Colors.purple)),
+      'Plastic Wrap': Tuple2('Content for Plastic Wrap', TextStyle(color: Colors.teal)),
+      'Wet Wipes': Tuple2('Content for Wet Wipes', TextStyle(color: Colors.brown)),
+      'Cotton Buds': Tuple2('Content for Cotton Buds', TextStyle(color: Colors.indigo)),
+      'Razor': Tuple2('Content for Razor', TextStyle(color: Colors.pink)),
+      'Hair Brushes and Combs': Tuple2('Content for Hair Brushes and Combs', TextStyle(color: Colors.amber)),
+      'Tampons and Pads': Tuple2('Content for Tampons and Pads', TextStyle(color: Colors.deepPurple)),
+      'Toilet Paper': Tuple2('Content for Toilet Paper', TextStyle(color: Colors.cyan)),
     };
 
-    return productContent[product.name] ?? 'Default content for unknown product';
+    var contentAndStyle = productContent[product.name] ?? Tuple2('Default content for unknown product', TextStyle());
+
+    return contentAndStyle.item1; // Returning the content part of Tuple
   }
 }
 
 class UserProfile extends StatelessWidget {
+  const UserProfile({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<Product> completedProducts =
@@ -158,7 +170,7 @@ class UserProfile extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Completed Products'),
+        title: const Text('Completed Products'),
       ),
       body: ListView.builder(
         itemCount: completedProducts.length,
@@ -196,13 +208,13 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showDialog(context);
+        _showDialog();
       },
       onLongPress: () {
         _toggleSelection();
       },
       child: Card(
-        margin: EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
         color: isSelected ? Colors.greenAccent : null,
         child: Column(
           children: [
@@ -225,13 +237,16 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
-  void _showDialog(BuildContext context) {
+  void _showDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(widget.product.name),
-          content: Text(_getContentForProduct(widget.product)),
+          content: Text(
+            _getContentForProduct(widget.product),
+            style: _getContentStyle(widget.product),
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -245,6 +260,26 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
+  TextStyle _getContentStyle(Product product) {
+    // Define content styles for each product
+    Map<String, TextStyle> productStyles = {
+      'Plastic Bottle': TextStyle(color: Colors.blue, fontSize: 16.0),
+      'Toothbrush': TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+      'Plastic Straws': TextStyle(color: Colors.green, fontStyle: FontStyle.italic),
+      'Plastic Cutlery': TextStyle(color: Colors.orange),
+      'Plastic Bag': TextStyle(color: Colors.purple),
+      'Plastic Wrap': TextStyle(color: Colors.teal),
+      'Wet Wipes': TextStyle(color: Colors.brown),
+      'Cotton Buds': TextStyle(color: Colors.indigo),
+      'Razor': TextStyle(color: Colors.pink),
+      'Hair Brushes and Combs': TextStyle(color: Colors.amber),
+      'Tampons and Pads': TextStyle(color: Colors.deepPurple),
+      'Toilet Paper': TextStyle(color: Colors.cyan),
+    };
+
+    return productStyles[product.name] ?? TextStyle(); // Default style if not found
+  }
+
   void _toggleSelection() {
     setState(() {
       isSelected = !isSelected;
@@ -252,25 +287,5 @@ class _ProductCardState extends State<ProductCard> {
         widget.onCompleted!();
       }
     });
-  }
-
-  String _getContentForProduct(Product product) {
-    // Define content for each product
-    Map<String, String> productContent = {
-      'Plastic Bottle': 'Content for Plastic Bottle',
-      'Toothbrush': 'Content for Toothbrush',
-      'Plastic Straws': 'Content for Plastic Straws',
-      'Plastic Cutlery': 'Content for Plastic Cutlery',
-      'Plastic Bag': 'Content for Plastic Bag',
-      'Plastic Wrap': 'Content for Plastic Wrap',
-      'Wet Wipes': 'Content for Wet Wipes',
-      'Cotton Buds': 'Content for Cotton Buds',
-      'Razor': 'Content for Razor',
-      'Hair Brushes and Combs': 'Content for Hair Brushes and Combs',
-      'Tampons and Pads': 'Content for Tampons and Pads',
-      'Toilet Paper': 'Content for Toilet Paper',
-    };
-
-    return productContent[product.name] ?? 'Default content for unknown product';
   }
 }
