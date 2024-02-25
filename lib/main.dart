@@ -39,16 +39,22 @@ class _SplashState extends State<Splash> {
     super.initState(); 
   
     Timer( 
-      Duration(seconds: 2), 
+      const Duration(seconds: 4), 
       () =>Navigator.pushNamed( 
         context, '/login'),
       );  
   } 
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Text("Splash Screen"),
+        child: Icon(
+          Icons.grass_outlined,
+          color: Colors.green,
+          size: 100.0,
+        ),
       ),
     );
   }
