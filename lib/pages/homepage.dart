@@ -22,19 +22,20 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Product> products = [
-    Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
+    Product('Plastic Bottle', 'assets/appimagebottle.png'),
     Product('Toothbrush', 'assets/toothbrush-removebg-preview.png'),
     Product('Plastic Straws', 'assets/straw.png'),
-    Product('Plastic Cutlery', 'assets/plasticcutlery.jpg'),
+    Product('Plastic Cutlery', 'assets/plasticcutlery.png'),
     Product('Plastic Bag', 'assets/plasticbag.png'),
-    Product("Plastic Wrap", 'assets/plasticwrap.png'),
-    Product("Wet Wipes", 'assets/wetwipesimage.png'),
-    Product("Cotton Buds", 'assets/cottonbuds.png'),
-    Product("Razor", 'assets/razorimage.jpg'),
-    Product("Hair Brushes and Combs", 'assets/hairbrush.png'),
-    Product("Tampons and Pads", 'assets/products3.jpg'),
-    Product("Toilet Paper", 'assets/toiletpaper.jpg'),
-  ];
+    Product("Plastic Wrap",'assets/plasticwrap.png'),
+    Product("Wet Wipes",'assets/wetwipesimage.png'),
+    Product("Cotton Buds",'assets/cottonbuds.png'),
+    Product("Razor",'assets/razorimage.jpg'),
+    Product("Hair Brushes",'assets/hairbrush.png'),
+    Product("Tampons and Pads",'assets/pads.png'),
+    Product("Toilet Paper",'assets/toiletpaper.png'),
+    ];
+
 
   List<Product> completedProducts = [];
 
@@ -95,6 +96,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
         ],
+        selectedItemColor: const Color.fromARGB(255, 23 , 33, 7),
       ),
     );
   }
@@ -193,37 +195,63 @@ class _ProductCardState extends State<ProductCard> {
   bool isSelected = false;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _showDialog(context);
-      },
-      onLongPress: () {
-        _toggleSelection();
-      },
-      child: Card(
-        margin: EdgeInsets.all(8.0),
-        color: isSelected ? Colors.greenAccent : null,
-        child: Column(
-          children: [
-            Image.asset(
-              widget.product.imagePath,
-              height: 100.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.product.name,
-                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+Widget build(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      _showDialog(context);
+    },
+    onLongPress: () {
+      _toggleSelection();
+    },
+    child: Card(
+      margin: const EdgeInsets.all(8.0),
+      color: isSelected ? const Color.fromARGB(200, 121, 159, 12) : null,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: 16/12, // Adjust the aspect ratio as needed
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8.0),
+                topRight: Radius.circular(8.0),
+                
+              ),
+              child: Image.asset(
+                widget.product.imagePath,
+                fit: BoxFit.fitHeight
+
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+              height: 47,
+              width: 200,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(8.0),
+                  bottomRight: Radius.circular(8.0),
+                  ), 
+                color: Color.fromARGB(255, 86, 130, 20),
+              ),
+              child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.product.name,
+                          style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,           
+                        ),
+                      ),
+                    ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+
+
+
 
   void _showDialog(BuildContext context) {
     showDialog(
