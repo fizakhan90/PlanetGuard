@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:planet_guard/pages/homepage.dart';
 import 'package:planet_guard/pages/login.dart';
+import 'package:planet_guard/pages/marketplace.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,8 @@ class MyApp extends StatelessWidget {
         '/login' : (context) => LoginPage(),
         '/home'  : (context) => HomePage(),
         '/profile' : (context) => UserProfile(),
+        '/marketplace' : (context) => Marketplace(),
+
       },
       );
       }

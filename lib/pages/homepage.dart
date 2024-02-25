@@ -8,12 +8,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  int _currentIndex = 0;
+
   final List<Product> products = [
     Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
     Product('Toothbrush', 'assets/product2.jpg'),
     Product('Plastic Straws', 'assets/product3.jpg'),
     Product('Plastic Cutlery', 'assets/appimagebottle.PNG'),
     Product('Plastic Bag', 'assets/product2.jpg'),
+    Product("Plastic Wrap",'assets/products3.jpg'),
+    Product("Wet Wipes",'assets/products3.jpg'),
+    Product("Cotton Buds",'assets/products3.jpg'),
+    Product("Razor",'assets/products3.jpg'),
+    Product("Hair Brushes and Combs",'assets/products3.jpg'),
+    Product("Tampons and Pads",'assets/products3.jpg'),
+    Product("Toilet Paper",'assets/products3.jpg'),
+
+
     // Add more products as needed
   ];
 
@@ -55,13 +66,53 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      
+       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          _navigateToPage(index);
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'User Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            label: 'Marketplace',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+        ],
+      ),
     );
+  }
+
+  void _navigateToPage(int index) {
+    if (index == 0) {
+      // Navigate to User Profile Page
+      Navigator.pushNamed(context, '/profile', arguments: completedProducts);
+    } else if (index == 1) {
+      // Navigate to Marketplace Page
+      Navigator.pushNamed(context, '/marketplace');
+    } else if (index == 2) {
+      // Navigate to Home Page (current page)
+    }
+  }
+
+      
+
+
+
     
   }
 
  
-  }
+
 
   void _showAlternativesDialog(BuildContext context, Product selectedProduct) {
     // Placeholder data for alternative products (replace it with your actual data)
