@@ -54,11 +54,18 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/appimagebottle.PNG
-    - assets/toothbrush-removebg-preview.png
-    - assets/straw.png
+    - assets/appimagebottle.jpg
     - assets/plasticbag.png
     - assets/plasticwrap.png
+    - assets/toothbrush-removebg-preview.png
+    - assets/straw.png
+    - assets/wetwipesimage.png
+    - assets/cottonbuds.png
+    - assets/razorimage.jpg
+    - assets/hairbrush.png
+    - assets/toiletpaper.jpg
+    - assets/plasticcutlery.jpg
+    - assets/PlanetGaurd.png
  
      
 

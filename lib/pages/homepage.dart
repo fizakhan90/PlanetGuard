@@ -25,15 +25,15 @@ class _HomePageState extends State<HomePage> {
     Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
     Product('Toothbrush', 'assets/toothbrush-removebg-preview.png'),
     Product('Plastic Straws', 'assets/straw.png'),
-    Product('Plastic Cutlery', 'assets/appimagebottle.PNG'),
+    Product('Plastic Cutlery', 'assets/plasticcutlery.jpg'),
     Product('Plastic Bag', 'assets/plasticbag.png'),
     Product("Plastic Wrap", 'assets/plasticwrap.png'),
-    Product("Wet Wipes", 'assets/products3.jpg'),
-    Product("Cotton Buds", 'assets/products3.jpg'),
-    Product("Razor", 'assets/products3.jpg'),
-    Product("Hair Brushes and Combs", 'assets/products3.jpg'),
+    Product("Wet Wipes", 'assets/wetwipesimage.png'),
+    Product("Cotton Buds", 'assets/cottonbuds.png'),
+    Product("Razor", 'assets/razorimage.jpg'),
+    Product("Hair Brushes and Combs", 'assets/hairbrush.png'),
     Product("Tampons and Pads", 'assets/products3.jpg'),
-    Product("Toilet Paper", 'assets/products3.jpg'),
+    Product("Toilet Paper", 'assets/toiletpaper.jpg'),
   ];
 
   List<Product> completedProducts = [];
@@ -213,10 +213,10 @@ class _ProductCardState extends State<ProductCard> {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.product.name,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ),
           ],
