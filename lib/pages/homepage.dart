@@ -220,16 +220,18 @@ Widget build(BuildContext context) {
     },
     child: Card(
       margin: const EdgeInsets.all(8.0),
-      color: isSelected ? Colors.greenAccent : null,
+      color: isSelected ? const Color.fromARGB(200, 121, 159, 12) : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          
           AspectRatio(
             aspectRatio: 16/12, // Adjust the aspect ratio as needed
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8.0),
                 topRight: Radius.circular(8.0),
+                
               ),
               child: Image.asset(
                 widget.product.imagePath,
