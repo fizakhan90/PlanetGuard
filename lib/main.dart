@@ -51,12 +51,12 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: Center(
-        child: Icon(
-          Icons.grass_outlined,
-          color: Colors.green,
-          size: 100.0,
+        child: Image.asset(
+          'assets/PlanetGaurd.png',
+          width : 300,
+          height : 300,
         ),
       ),
     );

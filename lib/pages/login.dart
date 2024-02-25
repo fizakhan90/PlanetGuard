@@ -6,50 +6,84 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: const Color.fromARGB(255, 119, 221, 119),
-      body: Center(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color.fromARGB(255, 225, 250, 225), Color.fromARGB(255, 92, 152, 92)]
+          )
+        ),
+      
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal:24.0),
           child: Column(
+            
             mainAxisAlignment : MainAxisAlignment.center,
-            children: [ const Text(
-              'BE A GAURDIAN OF THE PLANET!',
+            children: [
+              const SizedBox(height: 0),
+              const Text(
+              'BE A GUARDIAN OF THE PLANET!',
               style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255,0,20,13),
+                fontSize: 30,
+                color: Color.fromARGB(255, 30, 50, 30),
                 fontWeight: FontWeight.bold,
-              ),),
-            const SizedBox(height : 56),
-            TextField(
-              obscureText: false,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor : Colors.white,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                prefixIcon: const Icon(Icons.account_circle_outlined),
-                labelText: 'Enter your email',
-                ),
+              ),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 56),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                prefixIcon: const Icon(Icons.lock),
-                labelText: 'Enter your password',
+            const SizedBox(height : 80),
+            SizedBox(
+              height: 70,
+              child: TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor : Colors.white,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  prefixIcon: const Icon(Icons.account_circle_outlined),
+                  labelText: 'Enter your email',
+                  ),
               ),
             ),
-            const SizedBox(height: 56),
-            ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/home');}, 
-            child: const Text("Login"))
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 70,
+              child: TextField(
+                
+                obscureText: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  prefixIcon: const Icon(Icons.lock),
+                  labelText: 'Enter your password',
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 50,
+              width: 100,
+              child: ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/home');
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 30 , 50, 30)),
+              ), 
+              child: const Text("Login",
+              style: TextStyle(
+                fontSize: 20,
+                color: Color.fromARGB(255, 250, 250, 250 )
+              ),)),
+            ),
+            const SizedBox(height: 130)
             ]
           ),
         )
       ),
+    ),
     );
   }
 }
