@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planet_guard/pages/login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,11 +7,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Sample product data, replace it with your actual data
+
   final List<Product> products = [
-    Product('Product 1', 'assets/product1.jpg'),
-    Product('Product 2', 'assets/product2.jpg'),
-    Product('Product 3', 'assets/product3.jpg'),
+    Product('Plastic Bottle', 'assets/appimagebottle.PNG'),
+    Product('Toothbrush', 'assets/product2.jpg'),
+    Product('Plastic Straws', 'assets/product3.jpg'),
+    Product('Plastic Cutlery', 'assets/appimagebottle.PNG'),
+    Product('Plastic Bag', 'assets/product2.jpg'),
     // Add more products as needed
   ];
 
@@ -52,7 +55,12 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
+      
     );
+    
+  }
+
+ 
   }
 
   void _showAlternativesDialog(BuildContext context, Product selectedProduct) {
@@ -114,7 +122,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-}
+
 
 class UserProfile extends StatelessWidget {
   @override
