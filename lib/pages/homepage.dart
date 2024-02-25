@@ -31,10 +31,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: const Text('Product List'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.pushNamed(context, '/profile',
                   arguments: completedProducts);
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
           });
           _navigateToPage(index);
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'User Profile',
@@ -119,20 +119,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );
       },
     );
   }
-
-
- 
-
-
-  
-
 
 class UserProfile extends StatelessWidget {
   @override
@@ -142,7 +135,7 @@ class UserProfile extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Completed Products'),
+        title: const Text('Completed Products'),
       ),
       body: ListView.builder(
         itemCount: completedProducts.length,
@@ -178,36 +171,44 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _showDialog(context);
-      },
-      onLongPress: () {
-        _toggleSelection();
-      },
-      child: Card(
-        margin: EdgeInsets.all(8.0),
-        color: isSelected ? Colors.greenAccent : null,
-        child: Column(
+  return GestureDetector(
+    onTap: () {
+      _showDialog(context);
+    },
+    onLongPress: () {
+      _toggleSelection();
+    },
+    child: Card(
+      margin: EdgeInsets.all(8.0),
+      color: isSelected ? Colors.greenAccent : null,
+      child: SizedBox(
+        height: 150.0, // Adjust the height of the Card
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(
-              widget.product.imagePath,
-              height: 100.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            AspectRatio(
+              aspectRatio: 1, // Maintain the aspect ratio of the image
+              child: Image.asset(
+                widget.product.imagePath,
+                fit: BoxFit.cover,
+              ),
             ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                widget.product.name,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.product.name,
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   void _showDialog(BuildContext context) {
     showDialog(
@@ -221,7 +222,7 @@ class _ProductCardState extends State<ProductCard> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );
