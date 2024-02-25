@@ -52,9 +52,9 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return ProductCard(
             product: products[index],
-            onTap: () {
-              _showAlternativesDialog(context, products[index]);
-            },
+           onTap: () {
+  _showDialog(context, products[index]);
+},
             onCompleted: () {
               setState(() {
                 completedProducts.add(products[index]);
@@ -92,10 +92,10 @@ class _HomePageState extends State<HomePage> {
   void _navigateToPage(int index) {
     if (index == 0) {
       // Navigate to User Profile Page
-      Navigator.pushNamed(context, '/profile', arguments: completedProducts);
+      Navigator.pushNamed(context as BuildContext, '/profile', arguments: completedProducts);
     } else if (index == 1) {
       // Navigate to Marketplace Page
-      Navigator.pushNamed(context, '/marketplace');
+      Navigator.pushNamed(context as BuildContext, '/marketplace');
     } else if (index == 2) {
       // Navigate to Home Page (current page)
     }
@@ -107,57 +107,13 @@ class _HomePageState extends State<HomePage> {
 
     
   }
-
- 
-
-
-  void _showAlternativesDialog(BuildContext context, Product selectedProduct) {
-    // Placeholder data for alternative products (replace it with your actual data)
-    List<Product> alternativeProducts;
-
-    // Determine alternative products based on the selected product
-    if (selectedProduct.name == 'Product 1') {
-      alternativeProducts = [
-        Product('Alternative 1.1', 'assets/alternative1_1.jpg'),
-        Product('Alternative 1.2', 'assets/alternative1_2.jpg'),
-      ];
-    } else if (selectedProduct.name == 'Product 2') {
-      alternativeProducts = [
-        Product('Alternative 2.1', 'assets/alternative2_1.jpg'),
-        Product('Alternative 2.2', 'assets/alternative2_2.jpg'),
-      ];
-    } else if (selectedProduct.name == 'Product 3') {
-      alternativeProducts = [
-        Product('Alternative 3.1', 'assets/alternative3_1.jpg'),
-        Product('Alternative 3.2', 'assets/alternative3_2.jpg'),
-      ];
-    } else {
-      // Handle other products or set a default case
-      alternativeProducts = [];
-    }
-
+    void _showDialog(BuildContext context, Product selectedProduct) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alternatives for ${selectedProduct.name}'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Selected Product: ${selectedProduct.name}'),
-              SizedBox(height: 16.0),
-              Text('Alternatives:'),
-              for (Product alternative in alternativeProducts)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name: ${alternative.name}'),
-                    SizedBox(height: 8.0),
-                  ],
-                ),
-              // Add more alternative product information as needed
-            ],
-          ),
+          title: Text(selectedProduct.name),
+          content: Text('Selected Product: ${selectedProduct.name}'),
           actions: [
             TextButton(
               onPressed: () {
@@ -170,6 +126,12 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+
+
+ 
+
+
+  
 
 
 class UserProfile extends StatelessWidget {
@@ -218,7 +180,7 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showDialog();
+        _showDialog(context);
       },
       onLongPress: () {
         _toggleSelection();
@@ -247,7 +209,7 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
-  void _showDialog() {
+  void _showDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
