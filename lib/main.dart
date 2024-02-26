@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:planet_guard/pages/registerpage.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_guard/pages/homepage.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/home'  : (context) => HomePage(),
         '/profile' : (context) => UserProfile(),
         '/marketplace' : (context) => Marketplace(),
+        '/register' : (context) => RegisterPage(),
 
       },
       );
@@ -49,7 +51,7 @@ class _SplashState extends State<Splash> {
     Timer( 
       const Duration(seconds: 4), 
       () =>Navigator.pushNamed( 
-        context, '/login'),
+        context, '/register'),
       );  
   } 
 
