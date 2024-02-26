@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "680944072832",
+    "project_id": "plastic-guard-c9b94",
+    "storage_bucket": "plastic-guard-c9b94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680944072832:android:63c5a3177af331d6580e65",
+        "android_client_info": {
+          "package_name": "com.example.planet_guard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK9nMDrOKKZAafS16nZl75RETzetl4e7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

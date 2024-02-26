@@ -1,9 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  @override
+
+  Future<void> _loginWithEmailAndPassword(BuildContext context) async {
+  try {
+    if (_emailController.text.trim().isEmpty || _passwordController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter both email and password.'),
+        ),
+      );
+      return;
+    }
+
+    // Sign in with email and password
+    await _auth.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+    Navigator.pushReplacementNamed(context, '/home');
+  } catch (e) {
+    if (e is FirebaseAuthException) {
+      String errorMessage = 'An error occurred, please try again.';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'User not found. Please check your email.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Invalid password. Please try again.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+        ),
+      );
+    } else {
+      print('Unexpected error during login: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An unexpected error occurred.'),
+        ),
+      );
+    }
+  }
+}
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -36,6 +82,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 70,
               child: TextField(
+                controller: _emailController,
                 obscureText: false,
                 decoration: InputDecoration(
                   filled: true,
@@ -51,7 +98,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 70,
               child: TextField(
-                
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   filled: true,
@@ -67,8 +114,10 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 50,
               width: 100,
-              child: ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/home');
-              },
+              child: ElevatedButton(
+               onPressed: () async {
+                await _loginWithEmailAndPassword(context);
+                    },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 30 , 50, 30)),
               ), 
@@ -87,3 +136,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+

@@ -164,7 +164,7 @@ class Product {
   Product(this.name, this.imagePath, {this.isCompleted = false});
 
   String getContent() {
-    // Define content and styles for each product
+   
     Map<String, Tuple2<String, TextStyle>> productContent = {
       'Plastic Bottle': Tuple2('Switching to reusable stainless steel bottle, they are recyclable, light-weight and does not contribute to plastic waste',  TextStyle(color: Colors.black)),
       'Toothbrush': Tuple2('Using plastic toothbrushes not only drains the oil supply, but its also polluting our ocean and killed millions of wildlife animals every year. Switch to alternatives like bamboo and wooden toothbrushes.',  TextStyle(color: Colors.black)),
@@ -182,7 +182,7 @@ class Product {
 
     var contentAndStyle = productContent[name] ?? Tuple2('Default content for unknown product', TextStyle());
 
-    return contentAndStyle.item1; // Returning the content part of Tuple
+    return contentAndStyle.item1; 
   }
 }
 
@@ -293,7 +293,7 @@ class _ProductCardState extends State<ProductCard> {
       'Toilet Paper': TextStyle(color: Colors.black),
     };
 
-    return productStyles[product.name] ?? TextStyle(); // Default style if not found
+    return productStyles[product.name] ?? TextStyle(); 
   }
 
   void _toggleSelection() {

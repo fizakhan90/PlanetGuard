@@ -13,14 +13,14 @@ class Marketplace extends StatelessWidget {
           children: [
             Icon(
               Icons.shopping_cart,
-              size: 48.0, // Adjust the size as needed
-              color: Colors.green, // Adjust the color as needed
+              size: 48.0, 
+              color: Colors.green, 
             ),
-            SizedBox(height: 16.0), // Add some spacing
+            SizedBox(height: 16.0), 
             Text(
               "Coming Soon!",
               style: TextStyle(
-                fontSize: 24.0, // Adjust the font size as needed
+                fontSize: 24.0, 
                 fontWeight: FontWeight.bold,
               ),
             ),
