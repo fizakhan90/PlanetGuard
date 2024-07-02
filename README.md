@@ -7,7 +7,7 @@
 
 ## About the project
 Our Solution, Planet Guard is an application which aims to reduce the plastic consumption  and make one a responsible citizen. The problem we are trying to solve is that how small changes in our lifestyle can impact the environment. Plastic waste problem is a global challenge arising from the widespread use of plastics. Plastic waste persists for centuries, harming wildlife, polluting oceans, and contaminating soil and groundwater. Only 15% of plastic waste is currently recycled, emphasizing the urgent need for better waste management and sustainable alternatives.
-From here stems the idea of our project, by making small changes in our lifestyles we can significantly contribute to our planet's health. The application provides the user with alternative products which we use on our daily basis and track their progress.
+From here stems the idea of our project,by making small changes in our lifestyles we can significantly contribute to our planet's health. The application provides the user with alternative products which we use on our daily basis and track their progress.
 
 ## Demo video for Google Solution Challenge
 - Link to the Demo video - https://youtu.be/JBtyCTcsRCU
